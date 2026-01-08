@@ -5,10 +5,11 @@ const url = require('url');
 
 const PORT = process.env.PORT || 5500;
 
-// Data files
-const MENU_FILE = path.join(__dirname, 'menu.json');
-const ORDERS_FILE = path.join(__dirname, 'orders.json');
-const UPLOADS_DIR = path.join(__dirname, 'uploads');
+// Data files - Use /data for Render persistent disk, fallback to local for dev
+const DATA_DIR = process.env.NODE_ENV === 'production' && process.env.RENDER ? '/data' : __dirname;
+const MENU_FILE = path.join(DATA_DIR, 'menu.json');
+const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
+const UPLOADS_DIR = path.join(DATA_DIR, 'uploads');
 
 // Ensure data files exist
 if (!fs.existsSync(MENU_FILE)) {
@@ -164,6 +165,15 @@ const server = http.createServer(async (req, res) => {
     }
 
     // === API ROUTES ===
+
+    // GET /api/health - Health check endpoint for Render
+    if (pathname === '/api/health' && method === 'GET') {
+        return sendJSON(res, { 
+            status: 'healthy', 
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime()
+        });
+    }
 
     // GET /api/menu - Get all menu items
     if (pathname === '/api/menu' && method === 'GET') {
@@ -388,9 +398,15 @@ server.listen(PORT, () => {
     console.log('🍛 ═══════════════════════════════════════════════');
     console.log('   AMMA FOOD CENTER - Server Running!');
     console.log('═══════════════════════════════════════════════════');
-    console.log(`📱 Home Page:  http://localhost:${PORT}/`);
-    console.log(`⚙️  Admin Page: http://localhost:${PORT}/admin.html`);
-    console.log(`📡 API:        http://localhost:${PORT}/api/menu`);
+    if (process.env.RENDER) {
+        console.log(`☁️  Running on Render (Production)`);
+        console.log(`📁 Data directory: ${DATA_DIR}`);
+    } else {
+        console.log(`📱 Home Page:  http://localhost:${PORT}/`);
+        console.log(`⚙️  Admin Page: http://localhost:${PORT}/admin.html`);
+    }
+    console.log(`📡 API:        /api/menu, /api/orders`);
+    console.log(`❤️  Health:     /api/health`);
     console.log('═══════════════════════════════════════════════════');
     console.log('');
 });
