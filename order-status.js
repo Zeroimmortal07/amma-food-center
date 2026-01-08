@@ -58,7 +58,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Add updateOrderStatus function
     window.updateOrderStatus = async function (index, newStatus) {
-        const API_URL = "http://localhost:3000/api";
+        const API_URL = typeof CONFIG !== 'undefined' ? CONFIG.API_URL : "/api";
 
         try {
             const response = await fetch(`${API_URL}/orders/${index}/status`, {

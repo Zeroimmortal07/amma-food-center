@@ -33,20 +33,26 @@ window.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Access cart and menuItems from window scope (set by index.html module)
+        const cartData = window.cart || {};
+        const menuItemsData = window.menuItems || [];
+
         // Prepare Order Data
         let totalPrice = 0;
         const items = [];
 
-        Object.entries(cart).forEach(([id, qty]) => {
-            const item = menuItems.find(i => i.id == id);
-            const itemTotal = item.price * qty;
-            totalPrice += itemTotal;
-            items.push({
-                name: item.name,
-                quantity: qty,
-                price: item.price,
-                total: itemTotal
-            });
+        Object.entries(cartData).forEach(([id, qty]) => {
+            const item = menuItemsData.find(i => i.id == id);
+            if (item) {
+                const itemTotal = item.price * qty;
+                totalPrice += itemTotal;
+                items.push({
+                    name: item.name,
+                    quantity: qty,
+                    price: item.price,
+                    total: itemTotal
+                });
+            }
         });
 
         const orderData = {
@@ -86,10 +92,14 @@ window.addEventListener('DOMContentLoaded', () => {
         window.open(waUrl, '_blank');
         closeCheckoutModal();
 
-        // Clear cart
-        cart = {};
-        updateCartUI();
-        renderMenu();
+        // Clear cart using window scope
+        window.cart = {};
+        if (typeof window.updateCartUI === 'function') {
+            window.updateCartUI();
+        }
+        if (typeof window.renderMenu === 'function') {
+            window.renderMenu();
+        }
     };
 
     console.log('📱 WhatsApp number field added to checkout');

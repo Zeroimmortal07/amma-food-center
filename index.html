@@ -276,11 +276,16 @@
         let cart = {}; // { itemId: quantity }
         let activeCategory = "All";
 
+        // Expose state to window for external scripts
+        window.menuItems = menuItems;
+        window.cart = cart;
+
         // --- RENDER FUNCTIONS ---
         async function init() {
             try {
                 const response = await fetch(`${API_URL}/menu`);
                 menuItems = await response.json();
+                window.menuItems = menuItems; // Sync to window for external scripts
                 renderCategories();
                 renderMenu();
             } catch (error) {
@@ -365,6 +370,7 @@
             if (!cart[itemId]) cart[itemId] = 0;
             cart[itemId] += change;
             if (cart[itemId] <= 0) delete cart[itemId];
+            window.cart = cart; // Sync to window for external scripts
             renderMenu();
             updateCartUI();
         }
@@ -481,6 +487,7 @@
 
             // Clear cart
             cart = {};
+            window.cart = cart; // Sync to window for external scripts
             updateCartUI();
             renderMenu();
         }
