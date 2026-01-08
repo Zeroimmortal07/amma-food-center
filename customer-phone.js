@@ -92,8 +92,10 @@ window.addEventListener('DOMContentLoaded', () => {
         window.open(waUrl, '_blank');
         closeCheckoutModal();
 
-        // Clear cart using window scope
-        window.cart = {};
+        // Clear cart by removing all keys from the shared object
+        // This preserves the object reference so both window.cart and the module's cart stay in sync
+        Object.keys(window.cart).forEach(key => delete window.cart[key]);
+        
         if (typeof window.updateCartUI === 'function') {
             window.updateCartUI();
         }
