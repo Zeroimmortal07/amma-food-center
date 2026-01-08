@@ -2,6 +2,18 @@
 
 A modern, localized grocery shopping experience for Mumbai residents. This web application provides a seamless shopping experience with support for multiple languages and local cultural preferences.
 
+## 🚀 Quick Start with GitHub Codespaces
+
+Start developing instantly in the cloud - no local setup required!
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Zeroimmortal07/amma-food-center)
+
+1. Click the button above or go to **Code** → **Codespaces** → **Create codespace on main**
+2. Wait for the environment to load (dependencies install automatically)
+3. Use the **Live Server** extension to preview the website:
+   - Right-click on `index.html` → **Open with Live Server**
+   - Or use the command palette: `Ctrl+Shift+P` → "Live Server: Open with Live Server"
+
 ## 🌐 Free Website Hosting
 
 This website is designed to work as a **free static website** using GitHub Pages. No backend server required!
