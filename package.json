@@ -8,7 +8,8 @@
     },
     "scripts": {
         "start": "node server.js",
-        "dev": "webpack serve --mode development --devtool eval-source-map"
+        "dev": "webpack serve --mode development --devtool eval-source-map",
+        "build": "echo 'No build step needed'"
     },
     "dependencies": {
         "core-js": "^3.30.0"
