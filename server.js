@@ -11,6 +11,11 @@ const MENU_FILE = path.join(DATA_DIR, 'menu.json');
 const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
 const UPLOADS_DIR = path.join(DATA_DIR, 'uploads');
 
+// Ensure data directory exists (for Render persistent disk)
+if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
 // Ensure data files exist
 if (!fs.existsSync(MENU_FILE)) {
     fs.writeFileSync(MENU_FILE, JSON.stringify([
