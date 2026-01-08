@@ -96,7 +96,7 @@ const MOCK_MENU_DATA = [
         price: 45,
         category: "Dinner",
         description: "Soft wheat flatbreads with curry",
-        image: "https://images.unsplash.com/photo-1612838320302-4b3b3b3b3b3b?w=400&h=300&fit=crop",
+        image: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&h=300&fit=crop",
         availability: true
     },
     {
