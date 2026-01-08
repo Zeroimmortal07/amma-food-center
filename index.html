@@ -251,6 +251,7 @@
     </div>
 
     <script src="config.js"></script>
+    <script src="menu-data.js"></script>
     <script src="customer-phone.js"></script>
     <script type="module">
         // --- CONFIGURATION ---
@@ -284,14 +285,11 @@
                 renderCategories();
                 renderMenu();
             } catch (error) {
-                console.error("Error fetching menu:", error);
-                document.getElementById('menu-container').innerHTML = `
-                    <div class="col-span-2 md:col-span-3 lg:col-span-4 text-center py-12">
-                        <div class="text-6xl mb-4">😔</div>
-                        <p class="text-red-500 font-semibold mb-2">Error loading menu</p>
-                        <p class="text-sm text-gray-500">Is the server running?</p>
-                    </div>
-                `;
+                console.warn("Backend unavailable, using mock data:", error);
+                // Use mock data as fallback
+                menuItems = MOCK_MENU_DATA;
+                renderCategories();
+                renderMenu();
             }
         }
 
