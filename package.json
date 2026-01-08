@@ -8,10 +8,9 @@
     },
     "scripts": {
         "start": "node server.js",
-        "webpack": "webpack serve --mode development",
-        "build": "npm install",
+        "build": "echo 'No build step needed' && npm install",
         "dev": "webpack serve --mode development --devtool eval-source-map",
-        "prod": "NODE_ENV=production webpack serve --mode production --no-source-maps"
+        "dev:webpack": "webpack serve --mode development"
     },
     "dependencies": {
         "core-js": "^3.30.0"

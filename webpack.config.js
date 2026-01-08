@@ -40,6 +40,7 @@ module.exports = {
         open: false,
         hot: true,
         compress: true,
-        historyApiFallback: false
+        historyApiFallback: false,
+        allowedHosts: 'all'
     }
 }; 
