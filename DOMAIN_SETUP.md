@@ -4,7 +4,7 @@ This document provides instructions for configuring the custom domain www.afc.co
 
 ## Steps to Configure DNS
 
-To make http://www.afc.com/ work with this GitHub Pages site, you need to configure your DNS settings with your domain registrar.
+To make https://www.afc.com/ work with this GitHub Pages site, you need to configure your DNS settings with your domain registrar.
 
 ### 1. Configure DNS Records
 
@@ -59,7 +59,7 @@ DNS changes can take anywhere from a few minutes to 48 hours to propagate worldw
 ### 4. Verify Configuration
 
 Once DNS has propagated:
-1. Visit http://www.afc.com/ - it should load your website
+1. Visit https://www.afc.com/ - it should load your website
 2. Check that HTTPS is working (may take a few hours after DNS propagation)
 3. Both www.afc.com and afc.com should redirect to the same site
 
