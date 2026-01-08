@@ -146,15 +146,20 @@
                 <h1 class="text-2xl font-bold tracking-tight">Amma Food Center</h1>
                 <p class="text-xs text-purple-100 mt-0.5 font-medium">🍛 Home Cooked • ⚡ 10 Min Delivery</p>
             </div>
-            <button onclick="document.getElementById('cart-bar').scrollIntoView({behavior: 'smooth'})" class="relative">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                <span id="cart-count"
-                    class="absolute -top-2 -right-2 bg-white text-purple-600 text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center border-2 border-purple-500 hidden shadow-lg pulse-animation">0</span>
-            </button>
+            <div class="flex items-center space-x-3">
+                <a href="admin.html" class="text-purple-100 hover:text-white text-xs font-medium px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 transition-all" title="Admin Dashboard">
+                    ⚙️ Admin
+                </a>
+                <button onclick="document.getElementById('cart-bar').scrollIntoView({behavior: 'smooth'})" class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span id="cart-count"
+                        class="absolute -top-2 -right-2 bg-white text-purple-600 text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center border-2 border-purple-500 hidden shadow-lg pulse-animation">0</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -276,22 +281,31 @@
         let cart = {}; // { itemId: quantity }
         let activeCategory = "All";
 
+        // Demo data for static site hosting (GitHub Pages)
+        const DEMO_MENU = [
+            { id: 1, name: "Masala Dosa", price: 60, category: "Breakfast", image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=300&q=80", availability: true },
+            { id: 2, name: "Idli Sambar", price: 40, category: "Breakfast", image: "https://images.unsplash.com/photo-1589301760574-0a6f91d25815?auto=format&fit=crop&w=300&q=80", availability: true },
+            { id: 3, name: "Veg Thali", price: 120, category: "Lunch", image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=300&q=80", availability: true },
+            { id: 4, name: "Rice & Dal", price: 80, category: "Lunch", image: "https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=300&q=80", availability: true },
+            { id: 5, name: "Chapati Curry", price: 70, category: "Dinner", image: "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?auto=format&fit=crop&w=300&q=80", availability: true },
+            { id: 6, name: "Veg Biryani", price: 100, category: "Dinner", image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=300&q=80", availability: true },
+            { id: 7, name: "Samosa", price: 20, category: "Snacks", image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=300&q=80", availability: true },
+            { id: 8, name: "Tea", price: 15, category: "Snacks", image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?auto=format&fit=crop&w=300&q=80", availability: true }
+        ];
+
         // --- RENDER FUNCTIONS ---
         async function init() {
             try {
                 const response = await fetch(`${API_URL}/menu`);
+                if (!response.ok) throw new Error('API not available');
                 menuItems = await response.json();
                 renderCategories();
                 renderMenu();
             } catch (error) {
-                console.error("Error fetching menu:", error);
-                document.getElementById('menu-container').innerHTML = `
-                    <div class="col-span-2 md:col-span-3 lg:col-span-4 text-center py-12">
-                        <div class="text-6xl mb-4">😔</div>
-                        <p class="text-red-500 font-semibold mb-2">Error loading menu</p>
-                        <p class="text-sm text-gray-500">Is the server running?</p>
-                    </div>
-                `;
+                console.log("Using demo menu data for static site");
+                menuItems = DEMO_MENU;
+                renderCategories();
+                renderMenu();
             }
         }
 
