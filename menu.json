@@ -1,0 +1,44 @@
+[
+  {
+    "id": 2,
+    "name": "Idli Sambar",
+    "price": 50,
+    "category": "Breakfast",
+    "image": "https://images.unsplash.com/photo-1589301760574-0a6f91d25815?auto=format&fit=crop&w=300&q=80",
+    "availability": true
+  },
+  {
+    "id": 3,
+    "name": "Veg Meals",
+    "price": 120,
+    "category": "Lunch",
+    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300&q=80",
+    "availability": true
+  },
+  {
+    "id": 4,
+    "name": "Chicken Curry",
+    "price": 150,
+    "category": "Dinner",
+    "image": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=300&q=80",
+    "availability": true
+  },
+  {
+    "id": 1767854085182,
+    "name": "dosa",
+    "price": 44,
+    "category": "Breakfast",
+    "description": "",
+    "image": "/uploads/1767854085130-rbvjx4m64.png",
+    "availability": true
+  },
+  {
+    "id": 1767858391159,
+    "name": "ff",
+    "price": 55,
+    "category": "Breakfast",
+    "description": "68498",
+    "image": "/uploads/1767858391113-u46srpca4.png",
+    "availability": true
+  }
+]

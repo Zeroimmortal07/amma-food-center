@@ -4,8 +4,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
     mode: isDevelopment ? 'development' : 'production',
     entry: {
-        main: './JS/common.js',
-        localization: './JS/localization.js'
+        main: './app.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -32,5 +31,15 @@ module.exports = {
     },
     optimization: {
         minimize: !isDevelopment
+    },
+    devServer: {
+        static: {
+            directory: path.resolve(__dirname)
+        },
+        port: 8080,
+        open: false,
+        hot: true,
+        compress: true,
+        historyApiFallback: false
     }
 }; 
