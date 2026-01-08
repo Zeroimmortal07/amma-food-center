@@ -4,8 +4,8 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
     mode: isDevelopment ? 'development' : 'production',
     entry: {
-        main: './JS/common.js',
-        localization: './JS/localization.js'
+        main: './app.js',
+        modal: './modal.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

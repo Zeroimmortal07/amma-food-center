@@ -55,8 +55,8 @@
         <a href="index.html" class="continue-shopping-btn">Continue Shopping</a>
     </div>
 
-    <script src="JS/common.js"></script>
-    <script src="JS/localization.js"></script>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
     <script>
         function displayCartItems() {
             const cartContainer = document.getElementById('cartItems');
@@ -102,6 +102,13 @@
             alert('Coupon applied successfully!');
         }
 
+        function removeFromCart(itemId) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(item => item.id !== itemId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+        }
+
         function proceedToCheckout() {
             window.location.href = 'checkout.html';
         }
@@ -109,7 +116,6 @@
         // Initialize cart display
         document.addEventListener('DOMContentLoaded', function() {
             displayCartItems();
-            updateDeliveryEstimates(19.0760, 72.8777); // Mumbai coordinates
         });
     </script>
 </body>
