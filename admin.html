@@ -41,6 +41,9 @@
                     <p class="text-purple-100 mt-1">Manage orders and menu items</p>
                 </div>
                 <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-purple-100 hover:text-white text-sm font-medium px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 transition-all">
+                        🏠 Back to Store
+                    </a>
                     <span id="last-updated" class="text-sm text-purple-100 font-medium">Updating...</span>
                     <button onclick="fetchData()"
                         class="bg-white text-purple-600 px-5 py-2 rounded-xl font-bold hover:shadow-lg transition-all transform hover:scale-105">
@@ -150,6 +153,7 @@
     </div>
 
     <script src="config.js"></script>
+    <script src="demo-data.js"></script>
     <script>
         const API_URL = CONFIG.API_URL;
         let currentTab = 'orders';
@@ -187,23 +191,35 @@
                 }
                 document.getElementById('last-updated').innerText = "Last updated: " + new Date().toLocaleTimeString();
             } catch (error) {
-                console.error("Error fetching data:", error);
-                alert("⚠️ Error fetching data. Is the server running?");
+                console.log("Using demo data for static site");
+                document.getElementById('last-updated').innerText = "Demo mode: " + new Date().toLocaleTimeString();
             } finally {
                 btn.innerHTML = originalText;
             }
         }
 
         async function fetchOrders() {
-            const response = await fetch(`${API_URL}/orders`);
-            const orders = await response.json();
-            renderOrders(orders);
+            try {
+                const response = await fetch(`${API_URL}/orders`);
+                if (!response.ok) throw new Error('API not available');
+                const orders = await response.json();
+                renderOrders(orders);
+            } catch (error) {
+                console.log("Using demo orders data for static site");
+                renderOrders(DEMO_ORDERS);
+            }
         }
 
         async function fetchMenu() {
-            const response = await fetch(`${API_URL}/menu`);
-            const menu = await response.json();
-            renderMenu(menu);
+            try {
+                const response = await fetch(`${API_URL}/menu`);
+                if (!response.ok) throw new Error('API not available');
+                const menu = await response.json();
+                renderMenu(menu);
+            } catch (error) {
+                console.log("Using demo menu data for static site");
+                renderMenu(DEMO_MENU);
+            }
         }
 
         // --- RENDERING ---
